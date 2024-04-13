@@ -7,14 +7,7 @@ supabase: Client = create_client(url, key)
 
 print("\nyahoo!\n")
 
-def Authentication_insert(self, User, Pwd, FName, LName, Currency, Weight, Height):
-    self.User = User
-    self.Pwd = Pwd
-    self.FName = FName
-    self.LName = LName
-    self.Currency = Currency
-    self.Weight = Weight
-    self.Height = Height
+def Authentication_insert(User, Pwd, FName, LName, Currency, Weight, Height):
 
     data, count = supabase.table('General').insert({"USER": User, "PASSWORD": Pwd, "fName": FName, "lName": LName, "Currency": Currency, "Weight": Weight, "Height": Height}).execute()
 
