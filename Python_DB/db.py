@@ -11,4 +11,18 @@ def Authentication_insert(User, Pwd, FName, LName, Currency, Weight, Height):
 
     data, count = supabase.table('General').insert({"USER": User, "PASSWORD": Pwd, "fName": FName, "lName": LName, "Currency": Currency, "Weight": Weight, "Height": Height}).execute()
 
-Authentication_insert("Zeanders", "balls", "Zack", "Anderson", 1, 190, 70)
+def Authenticate_user(User, Pwd):
+    response = supabase.table('General').select("USER").eq("USER", User).eq("PASSWORD", Pwd).execute()
+    try:
+        print("response data is", response.data[0])
+        print("Authentication passed")
+    except:
+        print("Authentication failed")
+
+#Testing functions
+
+#Pass
+#Authentication_insert("Zeanders", "balls", "Zack", "Anderson", 1, 190, 70)
+#Pass
+#Authenticate_user("Zeanders","balls")
+
