@@ -1,7 +1,7 @@
 import HamburgerMenu from "../components/HamburgerMenu";
 import BubbleBox from "../components/BubbleBox";
 import GameBox from "../components/GameBox";
-import hogImage from "../images/MainLogoTrans1.png"
+import hogImage from "../images/MainLogoBig.png"
 
 
 function Header() {
@@ -12,7 +12,7 @@ function Header() {
                 <h1>Razor Fit</h1>
             </div>
             <div>
-                <img src={hogImage} style={{ width: '300px', height: '120px' }} />
+                <img src={hogImage} style={{ width: '500px', height: '100px' }} />
             </div>
             <div>
                 <p>Currency: 100 Piggies</p>

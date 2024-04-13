@@ -1,10 +1,16 @@
 import os
 import math
 from supabase import create_client, Client
+from flask import Flask, request
+import datetime
+
+x = datetime.datetime.now()
 
 url: str = os.environ.get("SUPABASE_URL", "https://qhlsgempmzuxeyizwkuh.supabase.co")
 key: str = os.environ.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFobHNnZW1wbXp1eGV5aXp3a3VoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI5NzM1NTAsImV4cCI6MjAyODU0OTU1MH0.7uY2VwbEywP8B8K6wwFOUfR7NjMG7v08LIZSkdKJ9go")
 supabase: Client = create_client(url, key)
+
+app = Flask(__name__)
 
 #Implementations for General Table
 
@@ -12,7 +18,9 @@ def Authentication_insert(User, Pwd, FName, LName, Currency, Weight, Height, Cal
 
     data, count = supabase.table('General').insert({"USER": User, "PASSWORD": Pwd, "fName": FName, "lName": LName, "Currency": Currency, "Weight": Weight, "Height": Height, "HSExercising": HSExercise, "CalGoal": CalGoal, "CalBurn": CalsBurn}).execute()
 
-def Authenticate_user(User, Pwd):
+def Authenticate_user():
+    User = request.args.get('User')
+    Pwd = request.args.get('Pwd')
     response = supabase.table('General').select("USER").eq("USER", User).eq("PASSWORD", Pwd).execute()
     try:
         print("response data is", response.data[0])
@@ -23,7 +31,9 @@ def Authenticate_user(User, Pwd):
         print("Authentication failed")
         return False
 
-def getFName(User):
+@app.route('/getFname')
+def getFName():
+    User = request.args.get('User')
     response = supabase.table('General').select("fName").eq('USER', User).execute()
     try:
         return response.data[0]['fName']
@@ -277,3 +287,5 @@ def getPrices():
     return response
 
 
+if __name__ == '__main__':
+    app.run(debug=True)
