@@ -218,3 +218,11 @@ def getPrices():
         print("price of", i["Hog"], "is", i["Cost"])
     return response
 
+def updateCalBurned(user, calBurned, hours, calGoal, exercise):
+    try:
+        currWeight = getWeight(user)
+    except:
+        currWeight = 172
+
+    if exercise == "Bench Press":
+        calculation = (BenchPressConstant)*currWeight*(hours/60)
