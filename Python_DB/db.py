@@ -1,5 +1,6 @@
 import os
 import math
+import time
 from supabase import create_client, Client
 
 url: str = os.environ.get("SUPABASE_URL", "https://qhlsgempmzuxeyizwkuh.supabase.co")
@@ -198,7 +199,7 @@ def calculateCalBurned(User, minutes, exercise):
         calc = math.floor(calculation)
 
     hrs = minutes/60
-    
+
     response = supabase.table('General').update({"CalBurn": calc}).eq("USER", User).execute()
     response = supabase.table('General').update({"HSExercising": hrs}).eq("USER", User).execute()
 
