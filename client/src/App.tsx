@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     Component: ErrorPage,
   }
 ], {
-  basename: "https://razorfit.design/"
+  basename: "https://razorfit.design"
 });
 
 function App() {
