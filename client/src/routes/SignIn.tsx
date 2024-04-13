@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function SignIn() {
-    const [userName, setUserName] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [shown, setShown] = useState<boolean>(false);
 
@@ -21,8 +21,8 @@ function SignIn() {
               id="userName"
               placeholder="Username"
               className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-              value={userName}
-              onChange={(event) => setUserName(event.target.value)}
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
             />
             <br></br><br></br>
             <input
@@ -45,10 +45,8 @@ function SignIn() {
               }}
             >Sign in</button>
             <button className='mt-1 text-white bg-darkRed p-1 rounded-md'  style={{width: '70px' }}
-              onClick={() => {
-                console.log("Sign up attempted")
-              }}
-            ><p>Sign up</p></button>
+              onClick={() => { location.href = '/signup'}}>
+            <p>Sign up</p></button>
             
             
             {/* <button className='text-red-500'  style={{width: '70px' }}
