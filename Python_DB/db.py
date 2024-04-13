@@ -15,6 +15,7 @@ def Authenticate_user(User, Pwd):
     response = supabase.table('General').select("USER").eq("USER", User).eq("PASSWORD", Pwd).execute()
     try:
         print("response data is", response.data[0])
+        #print("User is ", response.data[0]['USER'])
         print("Authentication passed")
     except:
         print("Authentication failed")
@@ -24,5 +25,5 @@ def Authenticate_user(User, Pwd):
 #Pass
 #Authentication_insert("Zeanders", "balls", "Zack", "Anderson", 1, 190, 70)
 #Pass
-#Authenticate_user("Zeanders","balls")
+Authenticate_user("Zeanders","balls")
 
