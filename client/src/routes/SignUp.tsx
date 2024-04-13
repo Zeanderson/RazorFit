@@ -1,22 +1,4 @@
 import { useState } from "react";
-
-
-// async function registerUser(username: string, pass: string, firstName: string, lastName: string) {
-//     try {
-//         const response = await axios.post("api/v1/user/register", {
-//             firstName: firstName,
-//             lastName: lastName,
-//             username: username,
-//             password: pass
-//             weight: weight
-//             height: height
-//         })
-//         console.log("Response: " + response)
-//     } catch (error) {
-//         console.error("Error: ", error)
-//     }
-// }
-
 function Register() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");

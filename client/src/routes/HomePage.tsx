@@ -5,7 +5,7 @@ import hogImage from "../images/MainLogoBig.png"
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFire, faFireAlt, faPerson, faStore, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faFire, faFireAlt, faStore, faUser } from "@fortawesome/free-solid-svg-icons";
 
 type headProps = {
     currency: string
@@ -35,7 +35,7 @@ type infoProps = {
     calBurn: string
 }
 
-function InformationTabs({ user, weight, height, calGoal, calBurn }: infoProps) {
+function InformationTabs({ user, calGoal, calBurn }: infoProps) {
     return (
         <div className="flex flex-col gap-4 p-2 pt-0">
             <BubbleButton>
