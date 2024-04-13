@@ -116,3 +116,14 @@ def updateUserName(oUser,nUser,pwd):
                 response = supabase.table('General').update({'USER':nUser}).eq('USER',oUser).execute()
     except: 
         print('error')
+def addExersise(name,MuscleG, Sport, type, link):
+    t = int(time.time())
+    response = supabase.table('Exersise').eq('Num', t).eq('MuscleG', MuscleG).eq('Type', type).execute()
+    if response: 
+        return False
+    else:
+        response = supabase.table('Exersise').insert({'Name':name,'MuscleG': MuscleG, 'Sport':Sport, 'Type':type,'link':link}).execute()
+        if response:
+            return True
+        else:
+            return False
