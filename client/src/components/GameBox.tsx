@@ -146,7 +146,7 @@ function GameBox() {
             <Sprite image={background} x={0} y={0} width={width} height={500} />
             <Hog width={width} xPosition={width / 2} yPosition={250} xVelocity={10} yVelocity={10} />
             {/* <Hog width={width} /> */}
-            {/* <FBHog width={width} /> */}
+            <FBHog width={width} xPosition={width / 2} yPosition={250} xVelocity={10} yVelocity={10} />
             {/* <FBHog width={width} /> */}
         </Stage>
     );
