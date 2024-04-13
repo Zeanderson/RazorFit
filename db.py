@@ -13,11 +13,21 @@ supabase: Client = create_client(url, key)
 app = Flask(__name__)
 
 #Implementations for General Table
-
-def Authentication_insert(User, Pwd, FName, LName, Currency, Weight, Height, CalGoal, CalsBurn, HSExercise):
-
+@app.route('/Authentication_insert')
+def Authentication_insert():
+    User = request.args.get('User')
+    Pwd = request.args.get('Pwd')
+    FName = request.args.get('FName')
+    LName = request.args.get('LName')
+    Currency = request.args.get('Currency')
+    Weight = request.args.get('Weight')
+    Height = request.args.get('Height')
+    CalGoal = request.args.get('CalGoal')
+    CalsBurn = request.args.get('CalsBurn')
+    HSExercise = request.args.get('HSExercise')
     data, count = supabase.table('General').insert({"USER": User, "PASSWORD": Pwd, "fName": FName, "lName": LName, "Currency": Currency, "Weight": Weight, "Height": Height, "HSExercising": HSExercise, "CalGoal": CalGoal, "CalBurn": CalsBurn}).execute()
 
+@app.route('/Authenticate_user')
 def Authenticate_user():
     User = request.args.get('User')
     Pwd = request.args.get('Pwd')
@@ -39,107 +49,128 @@ def getFName():
         return response.data[0]['fName']
     except:
         return "na"
-
-def getLName(User):
+@app.route('/getLName')
+def getLName():
+    User = request.args.get('User')
     response = supabase.table('General').select("lName").eq('USER', User).execute()
     try:
         return response.data[0]['lName']
     except:
         return "na"
-
-def getCurrency(User):
+@app.route('getCurrency')
+def getCurrency():
+    User = request.args.get('User')
     response = supabase.table('General').select("Currency").eq('USER', User).execute()
     try:
         return response.data[0]['Currency']
     except:
         return 0
-
-def getWeight(User):
+@app.route('getWeight')
+def getWeight():
+    User = request.args.get('User')
     response = supabase.table('General').select("Weight").eq('USER', User).execute()
     try:
         print("getting weight:",response.data[0]['Weight'])
         return response.data[0]['Weight']
     except:
         return 0
-
-def getHeight(User):
+@app.route('getHeight')
+def getHeight():
+    User = request.args.get('User')
     response = supabase.table('General').select("Height").eq('USER', User).execute()
     try:
         return response.data[0]['Height']
     except:
         return 0
-
-def getCalGoal(User):
+@app.route('getCalGoal')
+def getCalGoal():
+    User = request.args.get('User')
     response = supabase.table('General').select("CalGoal").eq('USER', User).execute()
     try:
         return response.data[0]['CalGoal']
     except:
             return 0
-
-def getCalBurn(User):
+@app.route('getCalBurn')
+def getCalBurn():
+    User = request.args.get('User')
     response = supabase.table('General').select("CalBurn").eq('USER', User).execute()
     try:
         return response.data[0]['CalBurn']
     except:
             return 0
-
-def getHSExercising(User):
+@app.route('getHSExercising')
+def getHSExercising():
+    User = request.args.get('User')
     response = supabase.table('General').select("HSExercising").eq('USER', User).execute()
     try:
         return response.data[0]['HSExercising']
     except:
             return 0
         
-    
-def updateFName(User,fName):
+@app.route('updateFName')
+def updateFName():
+    User = request.args.get('User')
+    fName = request.args.get('fName')
     response = supabase.table('General').update({'fName' : fName}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False 
-
-def updateLName(User, lName):
+@app.route('updateLName')
+def updateLName():
+    User = request.args.get('User')
+    lName = request.args.get('lName')
     response = supabase.table('General').update({'lName': lName}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
-
-def updateCurrency(User, currency):
+@app.route('updateCurrency')
+def updateCurrency():
+    User = request.args.get('User')
+    currency = request.args.get('currency')
     response = supabase.table('General').update({'Currency': currency}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
-
-def updateWeight(User, weight):
+@app.route('updateWeight')
+def updateWeight():
+    User = request.args.get('User')
+    weight = request.args.get('weight')
     response = supabase.table('General').update({'Weight': weight}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
-
-def updateHeight(User, height):
+@app.route('updateHeight')
+def updateHeight():
+    User = request.args.get('User')
+    height = request.args.get('height')
     response = supabase.table('General').update({'Height': height}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
-
-def updateCalGoal(User, CalGoal):
+@app.route('updateCalGoal')
+def updateCalGoal():
+    User = request.args.get('User')
+    CalGoal = request.args.get('CalGoal')
     response = supabase.table('General').update({'CalGoal': CalGoal}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
-
-def updateCalBurn(User, CalBurn):
+@app.route('updateCalBurn')
+def updateCalBurn():
+    User = request.args.get('User')
+    CalBurn = request.args.get('CalBurn')
     burn = getCalBurn(User)
     newBurn = burn + CalBurn
     
@@ -152,8 +183,10 @@ def updateCalBurn(User, CalBurn):
             return True
     except:
         return False
-
-def updateHSExercising(User, HSExercising):
+@app.route('updateHSExercising')
+def updateHSExercising():
+    User = request.args.get('User')
+    HSExercising = request.args.get('HSExercising')
     time = getHSExercising(User)
     newTime = time + HSExercising
     response = supabase.table('General').update({'HSExercising': newTime}).eq('USER', User).execute()
@@ -162,8 +195,11 @@ def updateHSExercising(User, HSExercising):
             return True
     except:
         return False
-    
-def calculateCalBurned(User, minutes, exercise):
+@app.route('calculateCalBurned')
+def calculateCalBurned():
+    User = request.args.get('User')
+    minutes = request.args.get('minutes')
+    exercise = request.args.get('exercise')
     currWeight = getWeight(User)
     if currWeight == 0:
         currWeight = 172
@@ -212,8 +248,11 @@ def calculateCalBurned(User, minutes, exercise):
     response = supabase.table('General').update({"CalBurn": calc}).eq("USER", User).execute()
     response = supabase.table('General').update({"HSExercising": hrs}).eq("USER", User).execute()
 
-
-def updatePassword(User,oldP,newP):
+@app.route('updatePassword')
+def updatePassword():
+    User = request.args.get('User')
+    oldP = request.args.get('oldP')
+    newP = request.args.get('newP')
     if Authenticate_user(User,oldP):
         response = supabase.table('General').update({'PASSWORD': newP}).eq('USER', User).execute()
     try:
@@ -221,8 +260,11 @@ def updatePassword(User,oldP,newP):
             print('updated password')
     except:
         print('error')
-        
-def updateUserName(oUser,nUser,pwd):
+@app.route('updateUserName')
+def updateUserName():
+    oUser = request.args.get('oUser')
+    nUser = request.args.get('nUser')
+    pwd = request.args.get('pwd')
     response = supabase.table('General').select('*').eq('USER', nUser).execute()
     try:
         if response:
@@ -234,8 +276,13 @@ def updateUserName(oUser,nUser,pwd):
         print('error')
 
 #Implementations for Exercise Table
-
-def addExersise(name,MuscleG, Sport, type, link):
+@app.route('addExersise')
+def addExersise():
+    name = request.args.get('name')
+    MuscleG = request.args.get('MuscleG')
+    Sport = request.args.get('Sport')
+    type = request.args.get('type')
+    link = request.args.get('link')
     t = int(time.time())
     response = supabase.table('Exersise').eq('Num', t).eq('MuscleG', MuscleG).eq('Type', type).execute()
     if response: 
@@ -248,38 +295,54 @@ def addExersise(name,MuscleG, Sport, type, link):
             return False
 
 #Implementations for Hogs Table
-
-def insertHogs(user, hog):
+@app.route('insertHogs')
+def insertHogs():
+    User = request.args.get('User')
+    hog = request.args.get('hog')
     data, count = supabase.table('Hogs').insert({"USER": user, "Hog": hog}).execute()
 
 #Implementations for Goals Table
-
-def Goal_Insert(GNum, User, Target, Deadline):
-    
+@app.route('Goal_Insert')
+def Goal_Insert():
+    GNum = request.args.get('GNum')
+    User = request.args.get('User')
+    Target = request.args.get('Target')
+    Deadline = request.args.get('Deadline')
     data, count = supabase.table('Goals').insert({"Goal Num": GNum, "Target": Target, "Deadline": Deadline, "USER": User}).execute()
-
-def Goal_Update(GNum, User, Target, Deadline, Progress):
-    
+@app.route('Goal_Update')
+def Goal_Update():
+    GNum = request.args.get('GNum')
+    User = request.args.get('User')
+    Target = request.args.get('Target')
+    Deadline = request.args.get('Deadline')
+    Progress = request.args.get('Progress')
     data, count = supabase.table('Goals').update({"Target": Target, "Deadline": Deadline, "Progress": Progress}).eq("Goal Num", GNum).eq("USER", User).execute()
-
-def Update_Target(GNum, User, Target):
-
+@app.route('Update_Target')
+def Update_Target():
+    GNum = request.args.get('GNum')
+    User = request.args.get('User')
+    Target = request.args.get('Target')
     data, count = supabase.table('Goals').update({"Target": Target}).eq("Goal Num", GNum).eq("USER", User).execute()
-
-def Update_Deadline(GNum, User, Deadline):
-
+@app.route('Update_Deadline')
+def Update_Deadline():
+    GNum = request.args.get('GNum')
+    User = request.args.get('User')
+    Deadline = request.args.get('Deadline')
     data, count = supabase.table('Goals').update({"Deadline": Deadline}).eq("Goal Num", GNum).eq("USER", User).execute()
-
-def Update_Progress(GNum, User, Progress): 
-
+@app.route('Update_Progress')
+def Update_Progress(): 
+    GNum = request.args.get('GNum')
+    User = request.args.get('User')
+    Progress = request.args.get('Progress')
     data, count = supabase.table('Goals').update({"Progress": Progress}).eq("Goal Num", GNum).eq("USER", User).execute()
-
-def Goal_Delete(GNum, User):
-
+@app.route('Goal_Delete')
+def Goal_Delete():
+    GNum = request.args.get('GNum')
+    User = request.args.get('User')
     data, count = supabase.table('Goals').delete().eq("Goal Num", GNum).eq("USER", User).execute()
 
 #Implementation for Prices Table
-
+@app.route('getPrices')
 def getPrices():
     response = supabase.table('Prices').select("*").execute()
     for i in response.data:
