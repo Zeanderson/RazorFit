@@ -1,4 +1,24 @@
 import React, { useState } from "react";
+import hogImage from "../images/MainLogoBig.png"
+import HamburgerMenu from "../components/HamburgerMenu";
+
+function Header() {
+    return (
+        <div className="flex flex-row bg-darkRed pl-4 pr-4 w-screen justify-between items-center">
+            <div className="flex flex-row gap-4">
+                <HamburgerMenu />
+                <h1>Razor Fit</h1>
+            </div>
+            <div>
+                <img src={hogImage} style={{ width: '500px', height: '100px' }} />
+            </div>
+            <div>
+                <p>Currency: </p>
+            </div>
+        </div>
+    )
+
+}
 function Calorie() {
     const [calorieGoal, setCalorieGoal] = useState<number | ''>();
     const [calorieBurned, setCalorieBurned] = useState<number | ''>();
@@ -25,8 +45,9 @@ function Calorie() {
     return (
 
         <div className="flex flex-col gap-1">
+            <Header/>
             <div>
-                <h1 className="mt-10 font-bold text-3xl text-red-700 text-center">Calorie Tracker</h1>
+                <h1 className="flex flex-row bg-darkRed pl-4 pr-4 w-screen justify-between text-center">Calorie Tracker</h1>
             </div>
             <div className = "max-w-ps p-s14 ml-10 rounded-lg text-center">
                 <label htmlFor = "calorieGoal" className="block text-medium text-red-700">Calorie Goal:</label>
