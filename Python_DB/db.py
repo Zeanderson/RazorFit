@@ -116,6 +116,9 @@ def updateUserName(oUser,nUser,pwd):
                 response = supabase.table('General').update({'USER':nUser}).eq('USER',oUser).execute()
     except: 
         print('error')
+
+#Implementations for Exercise Table
+
 def addExersise(name,MuscleG, Sport, type, link):
     t = int(time.time())
     response = supabase.table('Exersise').eq('Num', t).eq('MuscleG', MuscleG).eq('Type', type).execute()
@@ -127,3 +130,18 @@ def addExersise(name,MuscleG, Sport, type, link):
             return True
         else:
             return False
+
+#Implementations for Hogs Table
+
+def insertHogs(user, hog):
+    data, count = supabase.table('Hogs').insert({"USER": user, "Hog": hog}).execute()
+
+#Implementations for Goals Table
+
+#Implementation for Prices Table
+
+def getPrices():
+    response = supabase.table('Prices').select("*").execute()
+    for i in response.data:
+        print("price of", i["Hog"], "is", i["Cost"])
+    return response
