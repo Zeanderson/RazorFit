@@ -29,3 +29,27 @@ def Authenticate_user(User, Pwd):
 #Pass
 Authenticate_user("Zeanders","balls")
 
+
+def Goal_Insert(GNum, User, Target, Deadline):
+    
+    data, count = supabase.table('Goals').insert({"Goal Num": GNum, "Target": Target, "Deadline": Deadline, "USER": User}).execute()
+
+def Goal_Update(GNum, User, Target, Deadline, Progress):
+    
+    data, count = supabase.table('Goals').update({"Target": Target, "Deadline": Deadline, "Progress": Progress}).eq("Goal Num", GNum).eq("USER", User).execute()
+
+def Update_Target(GNum, User, Target):
+
+    data, count = supabase.table('Goals').update({"Target": Target}).eq("Goal Num", GNum).eq("USER", User).execute()
+
+def Update_Deadline(GNum, User, Deadline):
+
+    data, count = supabase.table('Goals').update({"Deadline": Deadline}).eq("Goal Num", GNum).eq("USER", User).execute()
+
+def Update_Progress(GNum, User, Progress): 
+
+    data, count = supabase.table('Goals').update({"Progress": Progress}).eq("Goal Num", GNum).eq("USER", User).execute()
+
+def Goal_Delete(GNum, User):
+
+    data, count = supabase.table('Goals').delete().eq("Goal Num", GNum).eq("USER", User).execute()
