@@ -7,9 +7,7 @@ function Register() {
   const [confPassword, setConfPassword] = useState<string>("");
   const [weight, setWeight] = useState<string>("");
   const [height, setHeight] = useState<string>("");
-  const [inputError, setInputError] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<boolean>(false);
+
 
   return (
     <div className="flex items-center justify-center h-screen font-Arvo">
@@ -79,8 +77,6 @@ function Register() {
           onChange={(event) => setHeight(event.target.value)}
         />
 
-        {inputError ? <p className="text-red-500 text-center text-xs italic">{error}</p> : null}
-        {success ? <p className="text-green-500 text-center">Success</p> : null}
 
         <button
 
