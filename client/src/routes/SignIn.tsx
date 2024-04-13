@@ -8,7 +8,7 @@ function SignIn() {
 
 
     return (
-        <div className="flex flex-col gap-2 bg-white h-screen items-center">
+        <div className="flex flex-col gap-2  h-screen items-center">
           <div className="flex flex-col items-center gap-1">
             <h1 className="mt-10 text-5xl font-bold text-red-700">
                 RazorFit
@@ -19,7 +19,7 @@ function SignIn() {
           <div>
             <input  
               id="userName"
-              placeholder="UserName"
+              placeholder="Username"
               className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
               value={userName}
               onChange={(event) => setUserName(event.target.value)}
@@ -39,18 +39,18 @@ function SignIn() {
             ) : null}
           </div>
 
-
-
-            <button className='text-green-500' style={{width: '70px' }}
+            <button className='mt-2 text-white bg-darkRed p-1 rounded-md' style={{width: '70px' }}
               onClick={() => {
                 console.log("Sign in attempted")
               }}
             >Sign in</button>
-            <button className='text-yellow-500'  style={{width: '70px' }}
+            <button className='mt-1 text-white bg-darkRed p-1 rounded-md'  style={{width: '70px' }}
               onClick={() => {
                 console.log("Sign up attempted")
               }}
             ><p>Sign up</p></button>
+            
+            
             {/* <button className='text-red-500'  style={{width: '70px' }}
               onClick={() => {
                 console.log("Red attempted")
