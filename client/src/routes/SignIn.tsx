@@ -8,9 +8,9 @@ function SignIn() {
 
 
     return (
-        <div className="flex flex-col gap-2 bg-white items-center">
+        <div className="flex flex-col gap-2 bg-white h-screen items-center">
           <div className="flex flex-col items-center gap-1">
-            <h1 className="text-5xl font-bold text-red-700">
+            <h1 className="mt-10 text-5xl font-bold text-red-700">
                 RazorFit
             </h1>
           </div>
@@ -51,11 +51,11 @@ function SignIn() {
                 console.log("Sign up attempted")
               }}
             ><p>Sign up</p></button>
-            <button className='text-red-500'  style={{width: '70px' }}
+            {/* <button className='text-red-500'  style={{width: '70px' }}
               onClick={() => {
                 console.log("Red attempted")
               }}
-            ><p>Red</p></button>
+            ><p>Red</p></button> */}
         </div>
     )
 }
