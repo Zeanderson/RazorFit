@@ -24,8 +24,93 @@ def Authenticate_user(User, Pwd):
 
 #Testing functions
 
-#Pass
-#Authentication_insert("Zeanders", "balls", "Zack", "Anderson", 1, 190, 70)
-#Pass
-Authenticate_user("Zeanders","balls")
+def getFName(user):
+    response = supabase.table('General').select("fName").eq('USER', user).execute()
+    try:
+        return response.data[0]['fName']
+    except:
+        return "na"
 
+def getLName(user):
+    response = supabase.table('General').select("lName").eq('USER').execute()
+    try:
+        return response.data[0]['lName']
+    except:
+        return "na"
+def getCurrency(user):
+    response = supabase.table('General').select("Currency").eq('USER').execute()
+    try:
+        return response.data[0]['Currency']
+    except:
+        return "na"
+def getWeight(user):
+    response = supabase.table('General').select("Weight").eq('USER').execute()
+    try:
+        return response.data[0]['Weight']
+    except:
+        return "na"
+def getHeight(user):
+    response = supabase.table('General').select("Height").eq('USER').execute()
+    try:
+        return response.data[0]['Height']
+    except:
+        return "na"
+    
+def updateFName(user,fName):
+    response = supabase.table('General').update({'fName' : fName}).eq('USER').execute()
+    try:
+        if response:
+            return True
+    except:
+        return False 
+
+def updateLName(user, lName):
+    response = supabase.table('General').update({'lName': lName}).eq('USER', user).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+
+def updateCurrency(user, currency):
+    response = supabase.table('General').update({'Currency': currency}).eq('USER', user).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+
+def updateWeight(user, weight):
+    response = supabase.table('General').update({'Weight': weight}).eq('USER', user).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+
+def updateHeight(user, height):
+    response = supabase.table('General').update({'Height': height}).eq('USER', user).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+def updatePassword(user,oldP,newP):
+    if Authenticate_user(user,oldP):
+        response = supabase.table('General').update({'PASSWORD': newP}).eq('USER', user).execute()
+    try:
+        if response:
+            print('updated password')
+    except:
+        print('error')
+        
+def updateUserName(oUser,nUser,pwd):
+    response = supabase.table('General').select('*').eq('USER', nUser).execute()
+    try:
+        if response:
+            print('username taken')
+        else:
+            if Authenticate_user(oUser,pwd):
+                response = supabase.table('General').update({'USER':nUser}).eq('USER',oUser).execute()
+    except: 
+        print('error')
