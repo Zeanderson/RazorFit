@@ -42,42 +42,43 @@ def getCurrency(User):
     try:
         return response.data[0]['Currency']
     except:
-        return "na"
+        return 0
 
 def getWeight(User):
     response = supabase.table('General').select("Weight").eq('USER', User).execute()
     try:
+        print("getting weight:",response.data[0]['Weight'])
         return response.data[0]['Weight']
     except:
-        return "na"
+        return 0
 
 def getHeight(User):
     response = supabase.table('General').select("Height").eq('USER', User).execute()
     try:
         return response.data[0]['Height']
     except:
-        return "na"
+        return 0
 
 def getCalGoal(User):
     response = supabase.table('General').select("CalGoal").eq('USER', User).execute()
     try:
         return response.data[0]['CalGoal']
     except:
-            return "na"
+            return 0
 
 def getCalBurn(User):
     response = supabase.table('General').select("CalBurn").eq('USER', User).execute()
     try:
         return response.data[0]['CalBurn']
     except:
-            return "na"
+            return 0
 
 def getHSExercising(User):
     response = supabase.table('General').select("HSExercising").eq('USER', User).execute()
     try:
         return response.data[0]['HSExercising']
     except:
-            return "na"
+            return 0
         
     
 def updateFName(User,fName):
@@ -129,75 +130,78 @@ def updateCalGoal(User, CalGoal):
         return False
 
 def updateCalBurn(User, CalBurn):
-    response = supabase.table('General').update({'CalBurn': CalBurn}).eq('USER', User).execute()
+    burn = getCalBurn(User)
+    newBurn = burn + CalBurn
+    
+    if newBurn >= getCalGoal(User):
+        print("Calorie Goal Reached")
+
+    response = supabase.table('General').update({'CalBurn': newBurn}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
 
-def updateCalBurned(User, minutes, exercise):
+def updateHSExercising(User, HSExercising):
+    time = getHSExercising(User)
+    newTime = time + HSExercising
+    response = supabase.table('General').update({'HSExercising': newTime}).eq('USER', User).execute()
     try:
-        currWeight = getWeight(User)
+        if response:
+            return True
     except:
+        return False
+    
+def calculateCalBurned(User, minutes, exercise):
+    currWeight = getWeight(User)
+    if currWeight == 0:
         currWeight = 172
+
+    print("currWeight:",currWeight)
 
     if exercise == "Bench Press":
         calculation = (2.933)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Barbell Squat":
         calculation = (2.933)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Deadlift":
         calculation = (2.933)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Skull Crushers":
         calculation = (2.933)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Barbell Rows":
         calculation = (3.858/60)*currWeight*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Dumbbell Hammer Curls":
         calculation = (2.933)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Dumbbell Step Ups":
         calculation = (5/60)*currWeight*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Calf Raises":
         calculation = (2.933)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Box Jumps":
         calculation = (11.5)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Lines":
         calculation = (6.810/60)*currWeight*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Mountain Climbers":
         calculation = (5.866)*(minutes)
-        math.floor(calculation)
+        calc = math.floor(calculation)
     elif exercise == "Long Distance Running":
         calculation = (3.634/60)*currWeight*(minutes)
-        math.floor(calculation)
-
-    sum = getCalBurn(User) + calculation
-
-    if sum >= getCalGoal(User):
-        print("Calorie Goal Reached")
+        calc = math.floor(calculation)
 
     hrs = minutes/60
-
-    response = supabase.table('General').update({"CalBurn": sum}).eq("USER", User).execute()
+    
+    response = supabase.table('General').update({"CalBurn": calc}).eq("USER", User).execute()
     response = supabase.table('General').update({"HSExercising": hrs}).eq("USER", User).execute()
 
-updateCalBurned("Zeanders", 30, "Long Distance Running")
-
-def updateHSExercising(User, HSExercising):
-    response = supabase.table('General').update({'HSExercising': HSExercising}).eq('USER', User).execute()
-    try:
-        if response:
-            return True
-    except:
-        return False
 
 def updatePassword(User,oldP,newP):
     if Authenticate_user(User,oldP):
@@ -218,8 +222,6 @@ def updateUserName(oUser,nUser,pwd):
                 response = supabase.table('General').update({'USER':nUser}).eq('USER',oUser).execute()
     except: 
         print('error')
-
-#Testing for General
 
 #Implementations for Exercise Table
 
