@@ -1,4 +1,7 @@
-import HamburgerMenu from "../components/MainBanner";
+import HamburgerMenu from "../components/HamburgerMenu";
+import BubbleBox from "../components/BubbleBox";
+import GameBox from "../components/GameBox";
+
 
 function Header() {
     return (
@@ -17,17 +20,40 @@ function Header() {
     )
 }
 
+function InformationTabs() {
+    return (
+        <div className="flex flex-col gap-4">
+            <BubbleBox>
+                <div>
+                    {"User Info"}
+                </div>
+            </BubbleBox>
+            <BubbleBox>
+                <div>
+                    {"Calories"}
+                </div>
+            </BubbleBox>
+            <BubbleBox>
+                <div>
+                    {"Exercise"}
+                </div>
+            </BubbleBox>
+        </div>
+    )
+}
+
 function Body() {
     return (
-        <div>
-            {"Hello :)"}
+        <div className="flex flex-row gap-4 justify-center">
+            <InformationTabs />
+            <GameBox />
         </div>
     )
 }
 
 function Home() {
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
             <Header />
             <Body />
         </div>
