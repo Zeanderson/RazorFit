@@ -22,8 +22,6 @@ def Authenticate_user(User, Pwd):
         print("Authentication failed")
         return False
 
-#Testing functions
-
 def getFName(user):
     response = supabase.table('General').select("fName").eq('USER', user).execute()
     try:
@@ -37,18 +35,21 @@ def getLName(user):
         return response.data[0]['lName']
     except:
         return "na"
+
 def getCurrency(user):
     response = supabase.table('General').select("Currency").eq('USER').execute()
     try:
         return response.data[0]['Currency']
     except:
         return "na"
+
 def getWeight(user):
     response = supabase.table('General').select("Weight").eq('USER').execute()
     try:
         return response.data[0]['Weight']
     except:
         return "na"
+
 def getHeight(user):
     response = supabase.table('General').select("Height").eq('USER').execute()
     try:
@@ -95,6 +96,7 @@ def updateHeight(user, height):
             return True
     except:
         return False
+
 def updatePassword(user,oldP,newP):
     if Authenticate_user(user,oldP):
         response = supabase.table('General').update({'PASSWORD': newP}).eq('USER', user).execute()
