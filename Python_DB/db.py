@@ -277,4 +277,17 @@ def getPrices():
         print("price of", i["Hog"], "is", i["Cost"])
     return response
 
+def tryBuy(user, hog):
+    response = supabase.table('Prices').select('Cost').eq('Hog', hog).execute()
+    cost = response.data[0]['Cost']
+    response = supabase.table('General').select('Currency').eq('USER',user).execute()
+    wallet = response.data[0]['Currency']
+    if(cost <= wallet):
+        response = supabase.table('Hogs').insert({"USER":user,"HOG":hog}).execute()
+        updateCurrency(user, wallet - cost)
+        return True
+    else:
+        return False
+    
+    
 
