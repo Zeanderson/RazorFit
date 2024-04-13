@@ -69,10 +69,10 @@ async function getMyHogs(): Promise<PriceData[]> {
 }
 
 function SetUp() {
-    return (
-        // _globalAllHogs: PriceData[]
-        // globalAllHogs = getAllHogs()
-    )
+    // return (
+    //     _globalAllHogs: PriceData[]
+    //     globalAllHogs = getAllHogs()
+    // )
 }
 
 function Menu() {
@@ -105,7 +105,7 @@ function Shop() {
     return (
       <div className="flex flex-col gap-4">
         <Header />
-        <SetUp />
+        {/* <SetUp /> */}
         <Menu />
       </div>
     )
