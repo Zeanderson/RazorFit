@@ -1,7 +1,7 @@
 import HamburgerMenu from "../components/HamburgerMenu";
 import BubbleBox from "../components/BubbleBox";
 import GameBox from "../components/GameBox";
-import hogImage from "../images/mainLogoTrans.png"
+import hogImage from "../images/MainLogoTrans1.png"
 
 
 function Header() {
@@ -12,7 +12,7 @@ function Header() {
                 <h1>Razor Fit</h1>
             </div>
             <div>
-                <img src={hogImage} style={{ width: '250px', height: '150px' }} />
+                <img src={hogImage} style={{ width: '300px', height: '120px' }} />
             </div>
             <div>
                 <p>Currency: 100 Piggies</p>
@@ -45,7 +45,7 @@ function InformationTabs() {
 
 function Body() {
     return (
-        <div className="flex flex-row gap-4 justify-center">
+        <div className="flex flex-row gap-4 justify-evenly">
             <InformationTabs />
             <GameBox />
         </div>
