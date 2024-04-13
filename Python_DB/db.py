@@ -7,9 +7,9 @@ supabase: Client = create_client(url, key)
 
 #Implementations for General Table
 
-def Authentication_insert(User, Pwd, FName, LName, Currency, Weight, Height):
+def Authentication_insert(User, Pwd, FName, LName, Currency, Weight, Height, CalGoal, CalsBurn, HSExercise):
 
-    data, count = supabase.table('General').insert({"USER": User, "PASSWORD": Pwd, "fName": FName, "lName": LName, "Currency": Currency, "Weight": Weight, "Height": Height}).execute()
+    data, count = supabase.table('General').insert({"USER": User, "PASSWORD": Pwd, "fName": FName, "lName": LName, "Currency": Currency, "Weight": Weight, "Height": Height, "HSExercising": HSExercise, "CalGoal": CalGoal, "CalBurn": CalsBurn}).execute()
 
 def Authenticate_user(User, Pwd):
     response = supabase.table('General').select("USER").eq("USER", User).eq("PASSWORD", Pwd).execute()
@@ -22,84 +22,130 @@ def Authenticate_user(User, Pwd):
         print("Authentication failed")
         return False
 
-def getFName(user):
-    response = supabase.table('General').select("fName").eq('USER', user).execute()
+def getFName(User):
+    response = supabase.table('General').select("fName").eq('USER', User).execute()
     try:
         return response.data[0]['fName']
     except:
         return "na"
 
-def getLName(user):
-    response = supabase.table('General').select("lName").eq('USER').execute()
+def getLName(User):
+    response = supabase.table('General').select("lName").eq('USER', User).execute()
     try:
         return response.data[0]['lName']
     except:
         return "na"
 
-def getCurrency(user):
-    response = supabase.table('General').select("Currency").eq('USER').execute()
+def getCurrency(User):
+    response = supabase.table('General').select("Currency").eq('USER', User).execute()
     try:
         return response.data[0]['Currency']
     except:
         return "na"
 
-def getWeight(user):
-    response = supabase.table('General').select("Weight").eq('USER').execute()
+def getWeight(User):
+    response = supabase.table('General').select("Weight").eq('USER', User).execute()
     try:
         return response.data[0]['Weight']
     except:
         return "na"
 
-def getHeight(user):
-    response = supabase.table('General').select("Height").eq('USER').execute()
+def getHeight(User):
+    response = supabase.table('General').select("Height").eq('USER', User).execute()
     try:
         return response.data[0]['Height']
     except:
         return "na"
+
+def getCalGoal(User):
+    response = supabase.table('General').select("CalGoal").eq('USER', User).execute()
+    try:
+        return response.data[0]['CalGoal']
+    except:
+            return "na"
+
+def getCalBurn(User):
+    response = supabase.table('General').select("CalBurn").eq('USER', User).execute()
+    try:
+        return response.data[0]['CalBurn']
+    except:
+            return "na"
+
+def getHSExercising(User):
+    response = supabase.table('General').select("HSExercising").eq('USER', User).execute()
+    try:
+        return response.data[0]['HSExercising']
+    except:
+            return "na"
+        
     
-def updateFName(user,fName):
-    response = supabase.table('General').update({'fName' : fName}).eq('USER').execute()
+def updateFName(User,fName):
+    response = supabase.table('General').update({'fName' : fName}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False 
 
-def updateLName(user, lName):
-    response = supabase.table('General').update({'lName': lName}).eq('USER', user).execute()
+def updateLName(User, lName):
+    response = supabase.table('General').update({'lName': lName}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
 
-def updateCurrency(user, currency):
-    response = supabase.table('General').update({'Currency': currency}).eq('USER', user).execute()
+def updateCurrency(User, currency):
+    response = supabase.table('General').update({'Currency': currency}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
 
-def updateWeight(user, weight):
-    response = supabase.table('General').update({'Weight': weight}).eq('USER', user).execute()
+def updateWeight(User, weight):
+    response = supabase.table('General').update({'Weight': weight}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
 
-def updateHeight(user, height):
-    response = supabase.table('General').update({'Height': height}).eq('USER', user).execute()
+def updateHeight(User, height):
+    response = supabase.table('General').update({'Height': height}).eq('USER', User).execute()
     try:
         if response:
             return True
     except:
         return False
 
-def updatePassword(user,oldP,newP):
-    if Authenticate_user(user,oldP):
-        response = supabase.table('General').update({'PASSWORD': newP}).eq('USER', user).execute()
+def updateCalGoal(User, CalGoal):
+    response = supabase.table('General').update({'CalGoal': CalGoal}).eq('USER', User).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+
+def updateCalBurn(User, CalBurn):
+    response = supabase.table('General').update({'CalBurn': CalBurn}).eq('USER', User).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+
+def updateHSExercising(User, HSExercising):
+    response = supabase.table('General').update({'HSExercising': HSExercising}).eq('USER', User).execute()
+    try:
+        if response:
+            return True
+    except:
+        return False
+
+def updatePassword(User,oldP,newP):
+    if Authenticate_user(User,oldP):
+        response = supabase.table('General').update({'PASSWORD': newP}).eq('USER', User).execute()
     try:
         if response:
             print('updated password')
@@ -116,6 +162,8 @@ def updateUserName(oUser,nUser,pwd):
                 response = supabase.table('General').update({'USER':nUser}).eq('USER',oUser).execute()
     except: 
         print('error')
+
+#Testing for General
 
 #Implementations for Exercise Table
 
@@ -169,3 +217,4 @@ def getPrices():
     for i in response.data:
         print("price of", i["Hog"], "is", i["Cost"])
     return response
+
