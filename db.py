@@ -1,7 +1,7 @@
 import os
 import math
 from supabase import create_client, Client
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask_cors import CORS, cross_origin
 import datetime
 
@@ -12,7 +12,7 @@ key: str = os.environ.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
 supabase: Client = create_client(url, key)
 
 app = Flask(__name__)
-cors = CORS(app)
+CORS(app, origins="http://localhost:3000")
 
 #Implementations for General Table
 @app.route('/Authentication_insert')
@@ -36,14 +36,11 @@ def Authenticate_user():
     User = request.args.get('User')
     Pwd = request.args.get('Pwd')
     response = supabase.table('General').select("USER").eq("USER", User).eq("PASSWORD", Pwd).execute()
-    try:
-        print("response data is", response.data[0])
-        #print("User is ", response.data[0]['USER'])
-        print("Authentication passed")
-        return True
-    except:
-        print("Authentication failed")
-        return False
+
+    if response.data:
+        return Response(status=200, response="Pass")
+    else:
+        return Response(status=401, response="Fail")  # Unauthorized status code
 
 @app.route('/getFname')
 @cross_origin()
@@ -55,6 +52,7 @@ def getFName():
     except:
         return "na"
 @app.route('/getLName')
+@cross_origin()
 def getLName():
     User = request.args.get('User')
     response = supabase.table('General').select("lName").eq('USER', User).execute()
@@ -63,54 +61,59 @@ def getLName():
     except:
         return "na"
 @app.route('/getCurrency')
+@cross_origin()
 def getCurrency():
     User = request.args.get('User')
     response = supabase.table('General').select("Currency").eq('USER', User).execute()
     try:
-        return response.data[0]['Currency']
+        return str(response.data[0]['Currency'])
     except:
-        return 0
+        return ""
 @app.route('/getWeight')
+@cross_origin()
 def getWeight():
     User = request.args.get('User')
     response = supabase.table('General').select("Weight").eq('USER', User).execute()
     try:
         print("getting weight:",response.data[0]['Weight'])
-        return response.data[0]['Weight']
+        return str(response.data[0]['Weight'])
     except:
-        return 0
+        return ""
 @app.route('/getHeight')
+@cross_origin()
 def getHeight():
     User = request.args.get('User')
     response = supabase.table('General').select("Height").eq('USER', User).execute()
     try:
-        return response.data[0]['Height']
+        return str(response.data[0]['Height'])
     except:
-        return 0
+        return ""
 @app.route('/getCalGoal')
+@cross_origin()
 def getCalGoal():
     User = request.args.get('User')
     response = supabase.table('General').select("CalGoal").eq('USER', User).execute()
     try:
-        return response.data[0]['CalGoal']
+        return str(response.data[0]['CalGoal'])
     except:
-            return 0
+            return ""
 @app.route('/getCalBurn')
+@cross_origin()
 def getCalBurn():
     User = request.args.get('User')
     response = supabase.table('General').select("CalBurn").eq('USER', User).execute()
     try:
-        return response.data[0]['CalBurn']
+        return str(response.data[0]['CalBurn'])
     except:
-            return 0
+            return ""
 @app.route('/getHSExercising')
 def getHSExercising():
     User = request.args.get('User')
     response = supabase.table('General').select("HSExercising").eq('USER', User).execute()
     try:
-        return response.data[0]['HSExercising']
+        return str(response.data[0]['HSExercising'])
     except:
-            return 0
+            return ""
         
 @app.route('/updateFName')
 def updateFName():

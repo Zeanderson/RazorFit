@@ -1,6 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
 
 
 // async function registerUser(username: string, pass: string, firstName: string, lastName: string) {
@@ -32,82 +30,93 @@ function Register() {
   const [success, setSuccess] = useState<boolean>(false);
 
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div>
-        <h1 className="mt-10 font-bold text-3xl text-darkRed text-center">Sign Up</h1>
+    <div className="flex items-center justify-center h-screen font-Arvo">
+      <div className="flex flex-col gap-2 p-5 bg-darkRed rounded-2xl shadow-inner shadow-black">
+        <div className="flex flex-col items-center gap-1">
+          <h1 className="text-3xl text-center">Sign In</h1>
+        </div>
+        <input
+          id="firstName"
+          placeholder="First Name"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={firstName}
+          onChange={(event) => setFirstName(event.target.value)}
+        />
+
+        <input
+          id="lastName"
+          placeholder="Last Name"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={lastName}
+          onChange={(event) => setLastName(event.target.value)}
+        />
+
+        <input
+          id="username"
+          placeholder="Username"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+        />
+
+
+        <input
+          id="pass"
+          placeholder="Password"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={password}
+          type="password"
+          onChange={(event) => setPassword(event.target.value)}
+        />
+
+
+        <input
+          id="confirm-pass"
+          placeholder="Confirm Password"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={confPassword}
+          type="password"
+          onChange={(event) => setConfPassword(event.target.value)}
+        />
+
+
+        <input
+          id="weight"
+          placeholder="Weight"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={weight}
+          onChange={(event) => setWeight(event.target.value)}
+        />
+
+
+        <input
+          id="height"
+          placeholder="Optional: Height"
+          className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
+          value={height}
+          onChange={(event) => setHeight(event.target.value)}
+        />
+
+        {inputError ? <p className="text-red-500 text-center text-xs italic">{error}</p> : null}
+        {success ? <p className="text-green-500 text-center">Success</p> : null}
+
+        <button
+
+          className="border border-solid rounded-xl p-1 hover:bg-lightRed "
+        >
+          Sign up
+        </button>
+
+        <button
+          className="border border-solid rounded-xl p-1 hover:bg-lightRed"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          Back
+        </button>
       </div>
-      <div className=" bg-darkRed p-10 rounded-lg">
-        <form id="form" className="flex flex-col gap-2">
-          <label htmlFor="firstName" className="block text-medium text-black">First Name:</label>
-          <input
-            id="firstName"
-            placeholder="First Name"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-          />
-
-          <label htmlFor="lastName" className="block text-medium text-gray-600">Last Name:</label>
-          <input
-            id="lastName"
-            placeholder="Last Name"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-          />
-
-          <label htmlFor="username" className="block text-medium text-gray-600">Username:</label>
-          <input
-            id="username"
-            placeholder="Username"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-
-          <label htmlFor="password" className="block text-medium text-gray-600">Password: </label>
-          <input
-            id="pass"
-            placeholder="Password"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={password}
-            type="password"
-            onChange={(event) => setPassword(event.target.value)}
-          />
-
-          <label htmlFor="confPassword" className="block text-medium text-gray-600">Confirm Password: </label>
-          <input
-            id="confirm-pass"
-            placeholder="Confirm Password"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={confPassword}
-            type="password"
-            onChange={(event) => setConfPassword(event.target.value)}
-          />
-
-          <label htmlFor="weight" className="block text-medium text-gray-600">Weight: </label>
-          <input
-            id="weight"
-            placeholder="Weight"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={weight}
-            onChange={(event) => setWeight(event.target.value)}
-          />
-
-          <label htmlFor="height" className="block text-medium text-gray-600">Optional: Height</label>
-          <input
-            id="height"
-            placeholder="Optional: Height"
-            className="max-w-xs rounded-lg p-2 bg-slate-300 text-black"
-            value={height}
-            onChange={(event) => setHeight(event.target.value)}
-          />
-
-          {inputError ? <p className="text-red-500 text-center text-xs italic">{error}</p> : null}
-          {success ? <p className="text-green-500 text-center">Success</p> : null}
-        </form>
-      </div>
-      <button
+      {/* <button
         onClick={() => {
           if (
             firstName === "" ||
@@ -134,7 +143,7 @@ function Register() {
         className="border border-solid rounded-xl p-2 text-xl bg-black hover:border-Corp3"
       >
         Sign Up
-      </button>
+      </button> */}
     </div>
   )
 }
