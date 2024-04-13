@@ -16,7 +16,10 @@ export default {
         Corp2: '#254E58',
         Corp3: '#112D32',
         Corp4: '#4F4A41',
-        Corp5: '#6E6658'
+        Corp5: '#6E6658',
+        darkRed: '#882932',
+        lightRed:'#9D2235',
+        medBlue:'#3A54C7',
       },
       screens: {
         "sm": "640px",

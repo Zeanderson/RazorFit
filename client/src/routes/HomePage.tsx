@@ -1,9 +1,18 @@
-
+import HamburgerMenu from "../components/MainBanner";
 
 function Header() {
     return (
-        <div className="flex flex-row rounded bg-darkRed gap-2 py-2 pl-5 pr-5 items-center relative max-h-0.5">
-            <h1>Hello</h1>
+        <div className="flex flex-row bg-darkRed p-4 w-screen justify-between items-center">
+            <div className="flex flex-row gap-4">
+                <HamburgerMenu />
+                <h1>Razor Fit</h1>
+            </div>
+            <div>
+                <p>Image</p>
+            </div>
+            <div>
+                <p>Currency: 100 Piggies</p>
+            </div>
         </div>
     )
 }
@@ -11,14 +20,14 @@ function Header() {
 function Body() {
     return (
         <div>
-            {'Body'}
+            {"Hello :)"}
         </div>
     )
 }
 
 function Home() {
     return (
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-col gap-2">
             <Header />
             <Body />
         </div>
