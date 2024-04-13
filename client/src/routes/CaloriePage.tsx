@@ -1,26 +1,6 @@
 import HamburgerMenu from "../components/HamburgerMenu";
-import logoImage from "../images/MainLogoTrans1.png"
 import { useState } from "react";
-
-//------------------------------------------------------------------------------------------------------
-// Standard page header
-function Header() {
-    return (
-        <div className="flex flex-row bg-darkRed pl-4 pr-4 w-screen justify-between items-center">
-            <div className="flex flex-row gap-4">
-                <HamburgerMenu />
-                <h1>Shop</h1>
-            </div>
-            <div>
-                <img src={logoImage} style={{ width: '300px', height: '120px' }} />
-            </div>
-
-        </div>
-    )
-}
-
 import hogImage from "../images/MainLogoBig.png"
-import HamburgerMenu from "../components/HamburgerMenu";
 
 function Header() {
     return (
@@ -63,7 +43,6 @@ function CalorieInfo() {
     }
     return (
         <div className="flex flex-col gap-1">
-            <Header />
             <div>
                 <h1 className="flex flex-row bg-darkRed pl-4 pr-4 w-screen justify-between text-center">Calorie Tracker</h1>
             </div>
