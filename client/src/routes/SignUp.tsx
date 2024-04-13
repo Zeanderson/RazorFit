@@ -35,7 +35,9 @@ function Register() {
       <div>
         <h1 className="mt-10 font-bold text-3xl text-red-700 text-center">Sign Up</h1>
       </div>
-        <form id="form" className="flex flex-col gap-4">
+      <div className="bg-white p-10 rounded-lg">
+        <form id="form" className="flex flex-col gap-2">
+            <label htmlFor="firstName" className="block text-medium text-gray-600">First Name:</label>
             <input 
               id="firstName"
               placeholder="First Name"
@@ -44,6 +46,7 @@ function Register() {
               onChange={(event) => setFirstName(event.target.value)}
             />
 
+            <label htmlFor="lastName" className="block text-medium text-gray-600">Last Name:</label>           
             <input 
               id="lastName"
               placeholder="Last Name"
@@ -52,6 +55,7 @@ function Register() {
               onChange={(event) => setLastName(event.target.value)}
             />
 
+            <label htmlFor="username" className="block text-medium text-gray-600">Username:</label> 
             <input 
               id="username"
               placeholder="Username"
@@ -60,6 +64,7 @@ function Register() {
               onChange={(event) => setUsername(event.target.value)}
             />
 
+            <label htmlFor="password" className="block text-medium text-gray-600">Password: </label>    
             <input 
               id="pass"
               placeholder="Password"
@@ -69,6 +74,7 @@ function Register() {
               onChange={(event) => setPassword(event.target.value)}
             />
 
+            <label htmlFor="confPassword" className="block text-medium text-gray-600">Confirm Password: </label>    
             <input 
               id="confirm-pass"
               placeholder="Confirm Password"
@@ -78,6 +84,7 @@ function Register() {
               onChange={(event) => setConfPassword(event.target.value)}
             />
 
+            <label htmlFor="weight" className="block text-medium text-gray-600">Weight: </label>      
             <input 
               id="weight"
               placeholder="Weight"
@@ -86,6 +93,7 @@ function Register() {
               onChange={(event) => setWeight(event.target.value)}
             />
 
+            <label htmlFor="height" className="block text-medium text-gray-600">Optional: Height</label>    
             <input 
               id="height"
               placeholder="Optional: Height"
@@ -97,7 +105,7 @@ function Register() {
             {inputError ? <p className="text-red-500 text-center text-xs italic">{error}</p> : null}
             {success ? <p className="text-green-500 text-center">Success</p> : null}
         </form>
-
+    </div>
         <button 
           onClick={() => {
             if (
