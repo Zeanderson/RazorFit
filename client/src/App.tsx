@@ -4,7 +4,7 @@ import Home from './routes/HomePage'
 
 const router = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     Component: Home,
   },
 ]);
