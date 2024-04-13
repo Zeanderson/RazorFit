@@ -2,7 +2,8 @@ import HamburgerMenu from "../components/HamburgerMenu";
 import BubbleBox from "../components/BubbleBox";
 import GameBox from "../components/GameBox";
 import hogImage from "../images/MainLogoBig.png"
-
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function Header() {
     return (
@@ -20,13 +21,16 @@ function Header() {
         </div>
     )
 }
+type infoProps = {
+    user: string
+}
 
-function InformationTabs() {
+function InformationTabs({ user }: infoProps) {
     return (
         <div className="flex flex-col gap-4">
             <BubbleBox>
                 <div>
-                    {"User Info"}
+                    <p>{user}</p>
                 </div>
             </BubbleBox>
             <BubbleBox>
@@ -43,20 +47,50 @@ function InformationTabs() {
     )
 }
 
-function Body() {
+type bodyProps = {
+    user: string
+}
+
+function Body({ user }: bodyProps) {
     return (
         <div className="flex flex-row gap-4 justify-evenly">
-            <InformationTabs />
+            <InformationTabs user={user} />
             <GameBox />
         </div>
     )
 }
 
 function Home() {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:5000/getFname?User=ZachA`);
+                setData(response.data);
+            } catch (error: any) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Render loading state
+    if (loading) return <div>Loading...</div>;
+
+    // Render error state
+    if (error) return <div>Error </div>;
+
     return (
+
         <div className="flex flex-col gap-4">
             <Header />
-            <Body />
+            <Body user={data ?? ''} />
         </div>
     )
 }

@@ -1,10 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function SignIn() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  // const [shown, setShown] = useState<boolean>(false);
+  const [shown, setShown] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:5000/getFname?User=ZachA`);
+        setData(response.data);
+      } catch (error: any) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Render loading state
+  if (loading) return <div>Loading...</div>;
+
+  // Render error state
+  if (error) return <div>Error </div>;
 
 
   return (
@@ -34,9 +58,9 @@ function SignIn() {
           onChange={(event) => setPassword(event.target.value)}
         />
 
-        {/* {shown ? (
+        {shown ? (
           <p className="text-red-500"> Invalid credentials</p>
-        ) : null} */}
+        ) : null}
       </div>
 
       <button className='mt-2 text-white bg-darkRed p-1 rounded-md' style={{ width: '70px' }}
