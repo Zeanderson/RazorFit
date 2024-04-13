@@ -130,7 +130,7 @@ function Register() {
                 window.location.href = "/"
             }
           }}
-          className="border border-solid rounded-xl p-1 hover:bg-Corp3 hover:border-Corp3"
+          className="border border-solid rounded-xl p-2 text-xl bg-black hover:border-Corp3"
         >
             Sign Up
         </button>
