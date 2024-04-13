@@ -86,7 +86,7 @@ function Hog({ width, xPosition, yPosition, xVelocity, yVelocity
 function FBHog({ width, xPosition, yPosition, xVelocity, yVelocity }: props) {
     const [position, setPosition] = useState({ x: xPosition, y: yPosition });
     const [velocity, setVelocity] = useState({ x: xVelocity, y: yVelocity });
-    const fbHogArray = [fbhog, fbhog1, fbhog2, fbhog3, fbhog4, fbhog5, fbhog6, fbhog7];
+    const fbHogArray = [fbhog, fbhog1, fbhog2, fbhog3, fbhog4, fbhog5, fbhog6, fbhog7, fbhog8];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const fbHogPng = fbHogArray[currentImageIndex];
 
