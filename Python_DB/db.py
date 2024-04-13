@@ -6,3 +6,17 @@ key: str = os.environ.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
 supabase: Client = create_client(url, key)
 
 print("\nyahoo!\n")
+
+def Authentication_insert(self, Id, User, Pwd, FName, LName, Currency, Weight, Height):
+    self.id = Id
+    self.user = User
+    self.pwd = Pwd
+    self.fName = FName
+    self.lName = LName
+    self.currency = Currency
+    self.weight = Weight
+    self.height = Height
+
+    data, count = supabase.table('General') \
+    .insert({"ID": 3, "USER": "Zeanders", "PASSWORD": "noyou'reshit", "fName": "Zack", "lName": "Anderson", "Currency": 0, "Weight": 190, "Height": 70}) \
+    .execute()
