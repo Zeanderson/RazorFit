@@ -17,8 +17,10 @@ def Authenticate_user(User, Pwd):
         print("response data is", response.data[0])
         #print("User is ", response.data[0]['USER'])
         print("Authentication passed")
+        return True
     except:
         print("Authentication failed")
+        return False
 
 #Testing functions
 
